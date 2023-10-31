@@ -1,0 +1,44 @@
+<h1 class="text-center my-4">BOOKS</h1>
+<% if (msg.length !== 0) { %>
+<div class="alert alert-success" role="alert"><%= msg %></div>
+<% } %>
+<div class="container w-100 h-auto d-flex flex-wrap justify-content-between">
+  <% if (dataBuku.length == 0) { %>
+  <h1 class="text-danger mx-auto">DATA KOSONG</h1>
+  <% } %> <% dataBuku.forEach(buku => { %>
+
+  <div class="card mb-3" style="width: 22rem">
+    <div class="card-body">
+      <h3 class="card-title text-center"><%= buku.judul_buku %></h3>
+      <p class="card-text text-justify"><%= buku.deskripsi %></p>
+    </div>
+    <footer class="blockquote-footer">
+      <small class="text-muted">
+        <%= buku.nama_pengarang %> || <%= buku.tahun_terbit %>
+      </small>
+    </footer>
+    <div class="card-footer text-center">
+      <a href="/edit?id=<%= buku.id_buku %>"
+        ><button type="" class="btn btn-primary">Edit</button></a
+      >
+      <form
+        method="post"
+        action="/delete?_method=DELETE&id=<%= buku.id_buku %>"
+        class="d-inline"
+      >
+        <button
+          type=""
+          onclick="return confirm('Yakin?')"
+          class="btn btn-danger"
+        >
+          Delete
+        </button>
+      </form>
+    </div>
+  </div>
+  <% }) %>
+</div>
+
+<div class="d.flex justify-content-end p-4 fixed-bottom" style="width: 10rem">
+  <a class="btn btn-success" style="width: 8rem" href="/add-book">Add book</a>
+</div>
